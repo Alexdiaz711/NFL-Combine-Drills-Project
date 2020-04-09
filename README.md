@@ -41,7 +41,7 @@ I believe that NFL coaches, scouts and executives value top-end speed more than 
 
 Results from the NFL Combine are tracked by [NFLCombineResults.com](https://nflcombineresults.com/nflcombinedata.php?year=2000&pos=&college=) and are available in sortable tables for each year, as shown in Figure 1 below. Data is available beginning with the 1987 NFL Scouting Combine, and up to the 2020 Combine.
 
-![Figure 1: NFL Combine Results](direct link to image)
+![Figure 1: NFL Combine Results](images/combine_results.png)
 
 ## Frequentist Hypothesis Testing
 
