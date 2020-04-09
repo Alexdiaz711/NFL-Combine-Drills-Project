@@ -3,7 +3,7 @@
 An investigation into whether or not top-performers in the 40-yard dash are selected in the 1st round of the NFL Draft more often than top-performers in the other NFL Combine drills
 
 ## Background
-Early in the offseason, usually in February, the National Football League (NFL) hosts a few hundred of the top college football players at the NFL Scouting Combine where coaches, scouts, doctors and executives evaluate the players to better inform their choices in the upcoming NFL Draft. More than 300 prospects were in attendance of this year's NFL Combine.
+Early in the offseason, usually in February, the National Football League (NFL) hosts a few hundred of the top college football players at the NFL Scouting Combine where coaches, scouts, doctors and executives evaluate the players to better inform their choices in the upcoming NFL Draft. More than 300 prospects were in attendance at the 2020 NFL Combine.
 
 Here is a brief breakdown of the six main measurable drills at the NFL Combine [as described by the NFL](http://www.nfl.com/combine/workouts):
 
@@ -19,7 +19,7 @@ Here is a brief breakdown of the six main measurable drills at the NFL Combine [
 
 * The **short shuttle** is the first of the cone drills. It is known as the 5-10-5. What it tests is the athlete's lateral quickness and explosion in short areas. The athlete starts in the three-point stance, explodes out 5 yards to his right, touches the line, goes back 10 yards to his left, left hand touches the line, pivot, and he turns 5 more yards and finishes.
 
-At the NFL Draft in April, the teams take turns selecting players to join their them for the upcoming season. Each team starts with one draft pick in each of the seven rounds, but teams are allowed to negotiate trades with each other that can include any of their draft picks. So it is common to see a team with multiple draft picks in the same round. The draft is conducted and each team now their incoming rookie class.
+At the NFL Draft in April, the teams take turns selecting players to join their them for the upcoming season. Each team starts with one draft pick in each of the seven rounds, but teams are allowed to negotiate trades with each other that can include any of their draft picks. So it is common to see a team with multiple draft picks in the same round. Once the draft is concluded, each team has their incoming rookie class.
 
 After the draft, teams can then sign the players they drafted to a "rookie contract", which is typically a length of four years. The rookie contracts are structured due to collective bargaining and there is a big difference in the amount of money offered to a player selected in the 1st round vs the amount offered to a player selected in another round. On their rookie contracts, the signing bonus refers to the amount of money that is guaranteed to be paid to the player, regardless of their performance in the NFL, as long as the player avoids suspension and actually shows up to the games and practices. Here is a breakdown of the range of this year's estimated signing bonuses on rookie contracts per round from [OverTheCap.com](https://overthecap.com/draft/):
 
@@ -33,9 +33,9 @@ After the draft, teams can then sign the players they drafted to a "rookie contr
 
 As you can see, there is a financial incentive for a player to perform well at the NFL Combine, increasing their draft stock to hopefully be selected in the 1st round. There is also a financial incentive for teams to make sure they use their 1st round draft picks on the players they value the most.
 
-As the old football saying goes, "you can't coach speed." This refers to the idea that while most other skills and attributes can be greatly improved after entering the NFL, elite speed is something a player has or doesn't, and we know by the time they're out of college. Sure, poor running mechanics can be improved, but this is typically done in college, or in preparation for the NFL Combine. 
+As the old football saying goes, "you can't coach speed." This refers to the idea that while most other skills and attributes can be greatly improved after entering the NFL, elite speed is something a player has or doesn't. Sure, poor running mechanics can be improved, but this is typically done in college, or in preparation for the NFL Combine. 
 
-I believe that NFL coaches, scouts and executives value top-end speed more than any other physical attribute measured in the six main NFL Combine drills. Therefor, my research hypothesis for this investigation is that top-performers in the 40-yard dash are selected in the 1st round of the NFL Draft at a higher frequency than top-performers in any of the other 5 drills.
+I believe that NFL coaches, scouts and executives value top-end speed more than any other physical attribute measured in the six main NFL Combine drills. Therefore, my research hypothesis for this investigation is that top-performers in the 40-yard dash are selected in the 1st round of the NFL Draft at a higher frequency than top-performers in any of the other 5 drills.
 
 ## The Data
 
