@@ -79,6 +79,14 @@ Once the data was cleaned and joined, I was free to explore the data and attempt
 
 ![Combine Data Distributions](images/drill_data_dist.png)
 
+The above figure contiains a histogram of the scores from each of the six Combine drills in the data set. Each of the six samples includes all of the scores. in the title block of each subplot, the sample size, sample mean, and sample standard deviation are also displayed. You can see that more Combine participants choose to run the 40-yard dash than participate in any of the other drills. 
+
+The scores for the bench press look to be normally distributed, while the scores for the vertical leap and the broad jump look to be very close to normally distributed. However, scores for the 40-yard dash, 3 cone drill and shuttle drill are obviously skewed-right. Initially, I believed a Gumbel distribution would be best to model the distribution of scores for these drills. The Gumbel distribution is often used to model extreme values, such as a distribution of sample minimums or maximums. This made sense to me because after all, these are elite athletes and they could be viewed as the extreme cases of the world's population. Perhaps the scores of all people running the 40-yard dash would look normally distributed and this theory would make sense. But there was one problem: wouldn't the same effect be represented with the bench press, vertical leap, and broad jump?
+
+I began to explore the data further and the cause of this skewness became apparent when I looked at the ditribution of the participant's weights for each drill:
+
+![Drill Scores vs Weight](images/skewed_drills.png)
+
 
 
 ## Frequentist Hypothesis Testing
