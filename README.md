@@ -49,7 +49,7 @@ Also, results from the NFL Draft are tracked by [Pro-Football-Reference.com](htt
 
 The data collected for this investigation begins with the 1994 Draft, where the NFL transitioned to a seven-round draft format, and continues until the 2019 Draft. Although the 2020 Combine has been completed, the 2020 Draft has not been conducted at the time of this investigation, so 2020 will cannot be included.
 
-A player was determined to be a "top-performer" in a Combine drill if they recorded a score in the top 10% within their draft year, and grouped by position. The draft year groupings were necessary because players are only competing to be a 1st round draft pick with players from their own draft year. The position grouings were necessary because of the vast differnces in physical makeup of the players at different positions. For example, the fastest of the 300-lb Offensive Tackles would not be considered a top-performer if grouped together with the speedy Wide Recievers. 
+A player was determined to be a "top-performer" in a Combine drill if they recorded a score in the top 10% within their draft year, and grouped by position. The draft year groupings were necessary because players are only competing to be a 1st round draft pick with players from their own draft year. The position groupings were necessary because of the vast differences in physical makeup of the players at different positions. For example, the fastest of the 300-lb Offensive Tackles would not be considered a top-performer if grouped together with the speedy Wide Receivers. 
 
 While considering the top 10% to be top-performers may seem arbitrary, that cutoff was chosen because there are 32 players selected in the 1st round of the Draft, while over 300 players were at the Combine. This means roughly 10% of Combine participants have a chance of being drafted in the 1st round.
 
@@ -61,17 +61,17 @@ To begin the process of getting the data ready for hypothesis testing, a Python 
 Next a script ('src/parsing_and_storing.py') was written which performed these actions:
 1. Extract the portion of each source code's string containing the table
 2. Parse each table into individual rows
-3. Store each row as an entry in a new collection on the same MongoDB. This resulted in one collection for the draft results and a seperate collection for the combine results.
+3. Store each row as an entry in a new collection on the same MongoDB. This resulted in one collection for the draft results and a separate collection for the combine results.
 4. Import the data into a Pandas DataFrame, initially cleaning the column names
-5. Store the draft and combine tables in seperate CSV files.
-6. Store the draft and combine tables in seperate tables in a PSQL database on a postgres server running in a docker container.
+5. Store the draft and combine tables in separate CSV files.
+6. Store the draft and combine tables in separate tables in a PSQL database on a postgres server running in a docker container.
 
 The next script ('src/cleaning_data.py') performed final cleaning and joining of the tables:
 1. Cast values to int/float for numeric columns
 2. Edit mismatched player names between the two tables
 3. Join the two tables and mark the players selected in the 1st round
 4. Reorganized player positions into 14 position groups
-5. Drop remaining uneeded columns
+5. Drop remaining unneeded columns
 6. Create a binomial sample of top-performers for each drill (grouped by position and year) with success (1) defined as being selected in the top 32 picks of the NFL Draft, and failure (0) defined as not being drafted in the top 32.
 7. Create a dictionary for each sample parameter: sample size, mean, standard deviation and probability of success.
 
@@ -88,11 +88,11 @@ Once the data was cleaned and joined, I was free to explore the data and attempt
 
 
 
-Next, looking at how the scores for each Comibine drill are distributed (all scores, not just the top-performers), the following figure was generated:
+Next, looking at how the scores for each Combine drill are distributed (all scores, not just the top-performers), the following figure was generated:
 
 ![Combine Data Distributions](images/drill_data_dist.png)
 
-The above figure contiains a normalized histogram of the scores from each of the six Combine drills in the data set. Each of the six samples includes all of the scores. in the title block of each subplot, the sample size, sample mean, and sample standard deviation are also displayed. You can see that more Combine participants choose to run the 40-yard dash than participate in any of the other drills. 
+The above figure contains a normalized histogram of the scores from each of the six Combine drills in the data set. Each of the six samples include all of the scores. In the title block of each subplot, the sample size, sample mean, and sample standard deviation are also displayed. You can see that more Combine participants choose to run the 40-yard dash than participate in any of the other drills. 
 
 The scores for the bench press look to be normally distributed, while the scores for the vertical leap and the broad jump look to be very close to normally distributed. However, scores for the 40-yard dash, 3 cone drill and shuttle drill are obviously skewed-right. Initially, I believed a Gumbel distribution would be best to model the distribution of scores for these drills. The Gumbel distribution is often used to model extreme values, such as a distribution of sample minimums or maximums. This made sense to me because after all, these are elite athletes and they could be viewed as the extreme cases of the world's population. Perhaps the scores of all people running the 40-yard dash would look normally distributed and this theory would make sense. But there was one problem: wouldn't the same effect be represented with the bench press, vertical leap, and broad jump?
 
@@ -108,7 +108,7 @@ I determined that if this was the culprit of the skewness, then if I partitioned
 <img src="images/fits_by_wq.png">
 </p>
 
-Next, I used the average of the four fit probability density functions at each x-value to create a total fit distribution for the enitre sample of scores. And the result is a fit model that approximates the score distribution better than the Normal and Gumbel fit models, which were both created using Python's SciPy module's .fit() method on the two distributions (this method uses the Maximum Likelihood Estimate to generate a fit):
+Next, I used the average of the four fit probability density functions at each x-value to create a total fit distribution for the entire sample of scores. And the result is a fit model that approximates the score distribution better than the Normal and Gumbel fit models, which were both created using Python's SciPy module's .fit() method on the two distributions (this method uses the Maximum Likelihood Estimate to generate a fit):
 
 <p align="center">
 <img src="images/fit_comparison.png">
@@ -126,14 +126,19 @@ It seems like this is an effective method of approximating the distribution of t
 
 The research hypothesis for this investigation is that top-performers in the 40-yard dash are selected in the 1st round of the NFL Draft at a higher frequency than top-performers in any of the other 5 drills.
 
-The six Combine drill's samples of top performers are modeled as samples of Binomial random variables, with fits as follows:
+The six Combine drill's samples of top performers are modeled as samples of the following binomial random variables:
 
+<p align="center">40-yard dash top-performers drafted in the 1st round ~ Binomial(n=820, p=0.206)</p>
+<p align="center">Bench press top-performers drafted in the 1st round ~ Binomial(n=672, p=0.107)</p>
+<p align="center">Vertical leap top-performers drafted in the 1st round ~ Binomial(n=732, p=0.142)</p>
+<p align="center">Broad jump top-performers drafted in the 1st round ~ Binomial(n=716, p=0.161)</p>
+<p align="center">Shuttle drill top-performers drafted in the 1st round ~ Binomial(n=644, p=0.149)</p>
+<p align="center">3 cone drill top-performers drafted in the 1st round ~ Binomial(n=598, p=0.140)</p>
 
+Examining the probability of success from each of the binomial random variables, I see that the frequency of being drafted in the first round was the highest for the 40-yard dash top-performers. This bodes well for my research hypothesis, and enables me to focus on a one-tailed z-test. I will walk throught the hypothesis testing setup for the 40-yard dash vs the bench press, but I will repeat this process for the 40-yard dash vs each of the other tests in turn. 
 
-
-
-
-
+First I state my null and alternate hypothesis: 
+<p align="center">H<sub>0</sub>: Top-performers in the 40-yard dash are not drafted in the 1st round at a higher frequency than top-performers in the bench press</p>
 
 ## Bayesian AB Testing
 
