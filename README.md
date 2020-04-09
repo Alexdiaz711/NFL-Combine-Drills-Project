@@ -1,4 +1,4 @@
-# <div align="center">You Can't Coach Speed!</div>
+# <div align="center">You Can't Coach Speed</div>
 #### <div align="center">by Alex Diaz-Clark</div>
 An investigation into whether or not top-performers in the 40-yard dash are selected in the 1st round of the NFL Draft more often than top-performers in the other NFL Combine drills
 
@@ -21,7 +21,7 @@ Here is a brief breakdown of the six main measurable drills at the NFL Combine [
 
 At the NFL Draft in April, the teams take turns selecting players to join their them for the upcoming season. Each team starts with one draft pick in each of the seven rounds, but teams are allowed to negotiate trades with each other that can include any of their draft picks. So it is common to see a team with multiple draft picks in the same round. Once the draft is concluded, each team has their incoming rookie class.
 
-After the draft, teams can then sign the players they drafted to a "rookie contract", which is typically a length of four years. The rookie contracts are structured due to collective bargaining and there is a big difference in the amount of money offered to a player selected in the 1st round vs the amount offered to a player selected in another round. On their rookie contracts, the signing bonus refers to the amount of money that is guaranteed to be paid to the player, regardless of their performance in the NFL, as long as the player avoids suspension and actually shows up to the games and practices. Here is a breakdown of the range of this year's estimated signing bonuses on rookie contracts per round from [OverTheCap.com](https://overthecap.com/draft/):
+After the draft, teams can then sign the players they drafted to a "rookie contract", which is typically a length of four years. The rookie contracts are structured due to collective bargaining and there is a big difference in the amount of money offered to a player selected in the 1st round vs the amount offered to a player selected in another round. On their rookie contracts, the signing bonus refers to the amount of money that is guaranteed to be paid to the player, regardless of their performance in the NFL, as long as the player avoids suspension and actually shows up to the games and practices. Here is a breakdown of the range of estimated signing bonuses on 2020 rookie contracts per round from [OverTheCap.com](https://overthecap.com/draft/):
 
 * 1st round: $5.43 million - $23.88 million
 * 2nd round: $1.37 million -  $3.88 million
@@ -39,6 +39,9 @@ I believe that NFL coaches, scouts and executives value top-end speed more than 
 
 ## The Data
 
+Results from the NFL Combine are tracked by [NFLCombineResults.com](https://nflcombineresults.com/nflcombinedata.php?year=2000&pos=&college=) and are available in sortable tables for each year, as shown in Figure 1 below. Data is available beginning with the 1987 NFL Scouting Combine, and up to the 2020 Combine.
+
+![Figure 1: NFL Combine Results](direct link to image)
 
 ## Frequentist Hypothesis Testing
 
