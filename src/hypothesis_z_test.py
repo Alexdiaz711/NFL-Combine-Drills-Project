@@ -8,7 +8,7 @@ font = {'weight': 'bold', 'size': 8}
 plt.rc('font', **font)
 
 
-def two_sample_z(drill_name, assumed_diff):
+def two_sample_z(drill_name, assumed_diff, alpha):
     '''
     Performes a two-sampled z-test between the 40-Yard dash data and the
     passed-in combine drill. Then, plots a visualization of the z-test.
@@ -20,6 +20,9 @@ def two_sample_z(drill_name, assumed_diff):
     assumed_diff: float
         A float representing the assumed difference in sample frequency to be
         used as the mean/mode of the null hypothesis distribution.
+    alpha: float
+        A float representing the maximum threshold for the p-value where
+        the null hypothesis can be rejected.
     ----------
     Returns 
     ----------
@@ -31,15 +34,22 @@ def two_sample_z(drill_name, assumed_diff):
     s_shared = np.sqrt((n40 +n2)*p_shared*(1-p_shared)/(n40*n2))
     dist_null = stats.norm(assumed_diff, s_shared)
     sample_diff = p40 - p2
+    dist_alt = stats.norm(sample_diff, s_shared)
     p_value = 1 - dist_null.cdf(sample_diff)
+    critical_value = dist_null.ppf(1-alpha)
+    power = 1 - dist_alt.cdf(critical_value)
     x = np.linspace(0-5*s_shared, 0+10*s_shared, 1000)
-    plot = ax.plot(x, dist_null.pdf(x), label='$H_0$')
+    plot = ax.plot(x, dist_null.pdf(x), color='g', label='$H_0$', zorder=2)
+    plot2 = ax.plot(x, dist_alt.pdf(x), color='m', label='$H_a$', zorder=3)
     fill = ax.fill_between(x, dist_null.pdf(x), 
-                where=(x >= sample_diff),color="blue", label='p-value region')
-    line = ax.axvline(sample_diff, color='b', alpha = 0.5, ls='--')
-    legend = ax.legend()
-    title = ax.set_title("Distribution of Difference in Sample Frequencies \n {} vs {}, p-value:{:0.2}"
-                .format(short_name[drills[0]], short_name[drill_name], p_value))
+                where=(x >= sample_diff),color="blue", label='p-value\n region', zorder=4)
+    fill2 = ax.fill_between(x, dist_alt.pdf(x), alpha=0.5, 
+                where=(x >= critical_value),color="grey", label='power', zorder=1)
+    line = ax.axvline(sample_diff, color='b', alpha = 0.5, ls='--', zorder=5)
+    critical = ax.axvline(critical_value, color='r', alpha = 0.5, ls='--', zorder=6)
+    legend = ax.legend(loc='best')
+    title = ax.set_title("Distribution of Difference in Sample Frequencies \n {} vs {} \n p-value:{:0.2}, Power of test ={:2.3}"
+                .format(short_name[drills[0]], short_name[drill_name], p_value, power))
 
 
 def max_sample_diff_z(drill_name, alpha):
@@ -84,19 +94,19 @@ fig, axs = plt.subplots(2, 3, figsize=(15,8))
 axs_f = axs.flatten()
 for i, x in enumerate(drills[1:]):
     ax = axs_f[i]
-    two_sample_z(x, 0.0)
+    two_sample_z(x, 0.0, 0.05)
 axs_f[-1].remove()
 fig.tight_layout()
 plt.savefig('images/z_test_all.png')
 
 # Find out what the maximum assumed difference in sample frequency
-# can be while still maintaining null-rejection at alpha=0.01
+# can be while still maintaining null-rejection at alpha=0.05
 fig, axs = plt.subplots(2, 3, figsize=(15,8))
 axs_f = axs.flatten()
 for i, x in enumerate(drills[1:]):
     ax = axs_f[i]
-    diff = max_sample_diff_z(x, 0.01)
-    two_sample_z(x, diff)
+    diff = max_sample_diff_z(x, 0.05)
+    two_sample_z(x, diff, 0.05)
     print('Max Diff for {} is {:2.4f}'.format(x, diff))
 axs_f[-1].remove()
 fig.tight_layout()

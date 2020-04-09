@@ -172,7 +172,7 @@ plt.savefig('images/drill_data_dist.png')
 # Bootstrapping 10000 samples for each drill and calculating 95% CI
 for drill in drills:
     lower, upper = bootstrap_95_ci(drill)
-    print('Based on 10,000 bootstrapped samples, the 95% CI\n for the {} is [{:2.2f}, {:2.2f}]'
+    print('Based on 10,000 bootstrapped samples, the 95% CI for the {} is [{:2.2f}, {:2.2f}]'
           .format(short_name[drill], lower, upper))
 
 

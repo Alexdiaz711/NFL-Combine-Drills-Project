@@ -23,7 +23,7 @@ def get_beta_params(drill_name):
     ----------
     A tuple of the alpha, beta
     '''
-    return mean[drill_name], n[drill_name] - mean[drill_name]
+    return mean[drill_name]+1, n[drill_name] - mean[drill_name]+1
 
 
 
@@ -154,11 +154,11 @@ for drill in drills[1:]:
 
 # Store the max differences calculated in the z-test.
 max_diffs = {drills[0]: 0.0,
-             drills[1]: 0.054,
-             drills[2]: 0.018,
-             drills[3]: 0.0,
-             drills[4]: 0.009,
-             drills[5]: 0.017}
+             drills[1]: 0.067,
+             drills[2]: 0.032,
+             drills[3]: 0.012,
+             drills[4]: 0.023,
+             drills[5]: 0.031}
             
 
 # Run the Bayesian AB test using the max assumed differences calculated
