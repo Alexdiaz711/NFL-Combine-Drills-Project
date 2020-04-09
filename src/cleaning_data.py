@@ -2,29 +2,70 @@ from pymongo import MongoClient
 import pandas as pd
 import numpy as np
 
+
+def cast_columns(df, columns):
+    '''
+    Takes a list of column names from a Pandas DF
+    and casts the values in those columns to floats
+    ----------
+    Parameters
+    ----------
+    df : Pandas DataFrame
+        A DF from which to cast columns to numeric
+    columns : list
+        A list of column names form a Panddas DF.
+    ----------
+    Returns 
+    ----------
+    None
+    '''
+    for col in columns:
+        df[col] = pd.to_numeric(df[col])
+
+
+def reorg_positions(inputs, output):
+    '''
+    Takes a list of player position names and changes a players
+    position to the output if their current posiiton is in the
+    input list
+    ----------
+    Parameters
+    ----------
+    inputs : list
+        A list of player position strings
+    output : string
+        A player position string.
+    ----------
+    Returns 
+    ----------
+    None
+    '''    
+    if pos in inputs:
+        joined.loc[i, 'POS'] = output
+
+
+# Connecting to MongoDB and creating Pandas DF's for final cleaning and joining of tables
 client = MongoClient('localhost', 27017)
 db = client['draft']
 combine = db['combine_results']
 draft = db['draft_results'] 
-
 combine_df = pd.DataFrame(list(combine.find()))
 draft_df = pd.DataFrame(list(draft.find()))
 
-# cleaning of Combine Data
+
+# Dropping uneeded columns and casting types
 combine_df = combine_df.drop('_id', axis=1)
 change_cols = ['Year', 'Height (in)', 'Weight (lbs)', 'Wonderlic', '40 Yard', 
                 'Bench Press', 'Vert Leap (in)', 'Broad Jump (in)', 'Shuttle', '3Cone']
-for col in change_cols:
-    combine_df[col] = pd.to_numeric(combine_df[col])
+cast_columns(combine_df, change_cols)
 
-# cleaning of Draft Data
 draft_df = draft_df.drop(['_id', 'To', 'AP1', 'PB', 'St', 'CarAV', 'DrAV', 'G', 'Cmp',
                              'Att', 'Yds', 'TD', 'Int', 'Rec', 'Solo', 'Sk', ''], axis=1)
 change_cols = ['Pick', 'Age']
-for col in change_cols:
-    draft_df[col] = pd.to_numeric(draft_df[col])
+cast_columns(draft_df, change_cols)
 
-#cleaning player names from draft
+
+# Cleaning player names from draft
 draft_df['Player'] = draft_df['Player'].str.strip(' HOF')
 draft_df['Player'] = draft_df['Player'].str.upper()
 combine_df['Name'] = combine_df['Name'].str.upper()
@@ -102,7 +143,7 @@ combine_df.loc[9119, 'Name'] = 'MIKE HUGHES 1'
 draft_df.loc[6073, 'Player'] = 'MIKE HUGHES 1'
 
 
-#joining dataframes and marking 1st round picks
+# Joining dataframes and marking 1st round picks
 for i in range(1994, 2020):
     combine = combine_df[combine_df['Year']==i]
     draft = draft_df[draft_df['Year']==i]
@@ -116,45 +157,32 @@ for i in range(1994, 2020):
         joined = joined.append(temp)
 joined = joined.reset_index()
 
-#organizing and cleaning player posiiton groups
+# Organizing and cleaning player posiiton groups
 for i, pos in enumerate(joined['POS']):
-    if type(joined['Pos'][i]) != float:
-        joined.POS[i] = joined.Pos[i]        
-joined = joined.drop('Pos', axis=1)
+    if type(joined.loc[i, 'Pos']) != float:
+        joined.loc[i, 'POS'] = joined.loc[i, 'Pos']
 for i, pos in enumerate(joined['POS']):
-    if joined['POS'][i] in ['FS', 'SS']:
-        joined.POS[i] = 'S'        
-for i, pos in enumerate(joined['POS']):
-    if joined['POS'][i] in ['OT','OL', 'G', 'C', 'LS']:
-        if (joined['POS'][i]=='OL' and joined['Height (in)'][i]>=77) or joined['POS'][i] == 'OT':
-            joined.POS[i] = 'T'         
+    reorg_positions(['FS', 'SS'], 'S')
+    reorg_positions(['EDG'], 'DE')
+    reorg_positions(['OLB', 'ILB'], 'LB')
+    reorg_positions(['NT'], 'DT')
+    reorg_positions(['FB'], 'RB')
+    reorg_positions(['DB'], 'CB')
+    if pos in ['OT','OL', 'G', 'C', 'LS']:
+        if (pos=='OL' and joined.loc[i, 'Height (in)']>=77) or pos == 'OT':
+            joined.loc[i, 'POS'] = 'T'         
         else:
-            joined.POS[i] = 'IOL'            
-for i, pos in enumerate(joined['POS']):
-    if joined['POS'][i] in ['EDG']:
-        joined.POS[i] = 'DE'
-for i, pos in enumerate(joined['POS']):
-    if joined['POS'][i] in ['OLD', 'ILB']:
-        joined.POS[i] = 'LB'        
-for i, pos in enumerate(joined['POS']):
-    if joined['POS'][i] in ['NT']:
-        joined.POS[i] = 'DT'        
-for i, pos in enumerate(joined['POS']):
-    if joined['POS'][i] in ['DL']:
-        if joined['Weight (lbs)'][i]>=285:
-            joined.POS[i] = 'DT'         
+            joined.loc[i, 'POS'] = 'IOL'
+    if pos == 'DL':
+        if joined.loc[i, 'Weight (lbs)']>=285:
+            joined.loc[i, 'POS'] = 'DT'         
         else:
-            joined.POS[i] = 'DE'      
-for i, pos in enumerate(joined['POS']):
-    if joined['POS'][i] in ['FB']:
-        joined.POS[i] = 'RB'        
-for i, pos in enumerate(joined['POS']):
-    if joined['POS'][i] in ['DB']:
-        joined.POS[i] = 'CB'
+            joined.loc[i, 'POS'] = 'DE'
 positions = joined['POS'].unique()
 
 
-# Renaming columns and droping unneeded Columns
+#Dropping remaining uneeded columns and renaming kept columns
+joined = joined.drop(columns=['index', 'Year_y', 'Player', 'Tm', 'Pos', 'Age', 'College/Univ'])
 joined = joined.rename(columns={'Year_x': 'Year',
     'POS': 'Pos',
     '40 Yard': '40 Yard Dash (sec)',
@@ -162,9 +190,11 @@ joined = joined.rename(columns={'Year_x': 'Year',
     'Vert Leap (in)': 'Vertical Leap (in)',
     'Shuttle': 'Shuttle Drill (sec)',
     '3Cone': '3 Cone Drill (sec)'})
-joined = joined.drop(columns=['index', 'Year_y', 'Player', 'Tm', 'Age', 'College/Univ'])
 
-# Recording samples' data
+
+# creating samples of top performers for each drill
+# players are grouped by year and position group
+# then top performer in group (or top 10%) are added to sample
 samples_dict = {}
 drills = ['40 Yard Dash (sec)', 'Bench Press (reps @ 225 lbs)', 'Vertical Leap (in)', 
     'Broad Jump (in)', 'Shuttle Drill (sec)', '3 Cone Drill (sec)']
@@ -184,3 +214,15 @@ for drill in drills:
                 samples_dict[drill].extend(sample)
             else:
                 samples_dict[drill] = sample
+
+
+# Creating dictionaries with sample parameters:
+n, p, mean, sd, short_name = {}, {}, {}, {}, {}
+for k, v in samples_dict.items():
+    n[k] = len(v)
+    p[k] = np.mean(v)
+    mean[k] = (n[k]*p[k])
+    sd[k] = np.sqrt(n[k]*p[k]*(1-p[k]))
+    short_name[k] = k.split()[0] + ' ' + k.split()[1]
+    print('Top Performers in {}: short_name= {}, n={}, mean={:2.2f}, sd={:2.2f}, p={:2.2f}'
+          .format(k, short_name[k], n[k], mean[k], sd[k], p[k]))
