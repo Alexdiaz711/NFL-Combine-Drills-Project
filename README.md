@@ -39,9 +39,47 @@ I believe that NFL coaches, scouts and executives value top-end speed more than 
 
 ## The Data
 
-Results from the NFL Combine are tracked by [NFLCombineResults.com](https://nflcombineresults.com/nflcombinedata.php?year=2000&pos=&college=) and are available in sortable tables for each year, as shown in Figure 1 below. Data is available beginning with the 1987 NFL Scouting Combine, and up to the 2020 Combine.
+Results from the NFL Combine are tracked by [NFLCombineResults.com](https://nflcombineresults.com/nflcombinedata.php?year=2000&pos=&college=) and are available in sortable tables for each year, as shown below. Data is available beginning with the 1987 NFL Scouting Combine, and up to the 2020 Combine.
 
-![Figure 1: NFL Combine Results](images/combine_results.png)
+![NFL Combine Results](images/combine_results.png)
+
+Also, results from the NFL Draft are tracked by [Pro-Football-Reference.com](https://www.pro-football-reference.com/years/2000/draft.htm) and are also available in sortable tables for each year, again shown below. Data is available beginning with the 1936 NFL Draft, and up to the 2019 Draft.
+
+![NFL Draft Results](images/draft_results.png)
+
+The data collected for this investigation begins with the 1994 Draft, where the NFL transitioned to a seven-round draft format, and continues until the 2019 Draft. Although the 2020 Combine has been completed, the 2020 Draft has not been conducted at the time of this investigation, so 2020 will cannot be included.
+
+A player was determined to be a "top-performer" in a Combine drill if they recorded a score in the top 10% within their draft year, and grouped by position. The draft year groupings were necessary because players are only competing to be a 1st round draft pick with players from their own draft year. The position grouings were necessary because of the vast differnces in physical makeup of the players at different positions. For example, the fastest of the 300-lb Offensive Tackles would not be considered a top-performer if grouped together with the speedy Wide Recievers. 
+
+While considering the top 10% to be top-performers may seem arbitrary, that cutoff was chosen because there are 32 players selected in the 1st round of the Draft, while over 300 players were at the Combine. This means roughly 10% of Combine participants have a chance of being drafted in the 1st round.
+
+To begin the process of getting the data ready for hypothesis testing, a Python script (available in this repository at 'src/web_scraping.py') was written to perform the following actions:
+1. Loop through each year's web page at both sites 
+2. Scrape both web pages for their source code 
+3. Store each source code as an entry (single string) in a collection in a database located on a Mongo server running in a Docker container
+
+Next a script ('src/parsing_and_storing.py') was written which performed these actions:
+1. Extract the portion of each source code's string containing the table
+2. Parse each table into individual rows
+3. Store each row as an entry in a new collection on the same MongoDB. This resulted in one collection for the draft results and a seperate collection for the combine results.
+4. Import the data into a Pandas DataFrame, initially cleaning the column names
+5. Store the draft and combine tables in seperate CSV files.
+6. Store the draft and combine tables in seperate tables in a PSQL database on a postgres server running in a docker container.
+
+The next script ('src/cleaning_data.py') performed final cleaning and joining of the tables:
+1. Cast values to int/float for numeric columns
+2. Edit mismatched player names between the two tables
+3. Join the two tables and mark the players selected in the 1st round
+4. Reorganized player positions into 14 position groups
+5. Drop remaining uneeded columns
+6. Create a binomial sample of top-performers for each drill (grouped by position and year) with success (1) defined as being selected in the top 32 picks of the NFL Draft, and failure (0) defined as not being drafted in the top 32.
+7. Create a dictionary for each sample parameter: sample size, mean, standard deviation and probability of success.
+
+Once the data was cleaned and joined, I was free to explore the data and attempt to understand its distributions (using the script available at 'src/data_distibutions.py'). Looking at how the scores for each Comibine drill are distributed (all scores, not just the top-performers), the following figure was generated:
+
+![Combine Data Distributions](images/drill_data_dist.png)
+
+
 
 ## Frequentist Hypothesis Testing
 
