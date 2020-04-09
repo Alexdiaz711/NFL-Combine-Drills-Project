@@ -83,9 +83,16 @@ The above figure contiains a histogram of the scores from each of the six Combin
 
 The scores for the bench press look to be normally distributed, while the scores for the vertical leap and the broad jump look to be very close to normally distributed. However, scores for the 40-yard dash, 3 cone drill and shuttle drill are obviously skewed-right. Initially, I believed a Gumbel distribution would be best to model the distribution of scores for these drills. The Gumbel distribution is often used to model extreme values, such as a distribution of sample minimums or maximums. This made sense to me because after all, these are elite athletes and they could be viewed as the extreme cases of the world's population. Perhaps the scores of all people running the 40-yard dash would look normally distributed and this theory would make sense. But there was one problem: wouldn't the same effect be represented with the bench press, vertical leap, and broad jump?
 
-I began to explore the data further and the cause of this skewness became apparent when I looked at the ditribution of the participant's weights for each drill:
+I began to explore the data further and the cause of this skewness became apparent when I looked at the distribution of the participants' weights for each drill. Below is a figure showing the three skewed score distributions, alongside the distribution of participants' weights, and finally a scatter plot of participant weight vs drill score:
 
 ![Drill Scores vs Weight](images/skewed_drills.png)
+
+Looking at the figure, you can see that generally, there looks to be a correlation between a participant's weight and their score in these drill, which makes sense because these are the drills measuring speed, agility, and acceleration. You can also see that the weight distribution is also skewed right. With lighter participants recording faster times, and there being more participants of below-average weight than above-average weight, now the skewness of these drills make sense.
+
+So I determined that if this was the culprit of the skewness, then if I partitioned a sample of drill scores into 4 subsets, using the four quartiles of the participant's weights, I could then choose a normally distributed random variable to model each. Next I fit a distribution to each quartile's drill score. Below is are the probability density functions for the quartile fit models for the 40-yard dash scores:
+
+
+![40-yard weight-quartile fits](images/fits_by_wq.png)
 
 
 
