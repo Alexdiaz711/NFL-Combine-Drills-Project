@@ -75,7 +75,20 @@ The next script ('src/cleaning_data.py') performed final cleaning and joining of
 6. Create a binomial sample of top-performers for each drill (grouped by position and year) with success (1) defined as being selected in the top 32 picks of the NFL Draft, and failure (0) defined as not being drafted in the top 32.
 7. Create a dictionary for each sample parameter: sample size, mean, standard deviation and probability of success.
 
-Once the data was cleaned and joined, I was free to explore the data and attempt to understand its distributions (using the script available at 'src/data_distibutions.py'). Looking at how the scores for each Comibine drill are distributed (all scores, not just the top-performers), the following figure was generated:
+Once the data was cleaned and joined, I was free to explore the data and attempt to understand its distributions (using the script available at 'src/data_distibutions.py'). I began by calculating a 95% confidence interval for the sample mean of each drill's scores based on 10000 bootstrapped samples:
+
+
+
+- 40-yard dash: [4.81, 4.82]
+- Bench Press: [20.49, 20.82]
+- Vertical Jump: [32.41, 32.62]
+- Broad Jump: [113.00, 113.44]
+- 3 Cone Drill: [4.39, 4.40]
+- Shuttle Drill: [7.32, 7.35]
+
+
+
+Next, looking at how the scores for each Comibine drill are distributed (all scores, not just the top-performers), the following figure was generated:
 
 ![Combine Data Distributions](images/drill_data_dist.png)
 
