@@ -122,6 +122,8 @@ Below are normalized histograms of the scores for all six Combine drills, each w
 
 It seems like this is an effective method of approximating the distribution of the Combine drill scores. Research on the proper techniques are forthcoming after this investigation. On to testing the research hypothesis.
 
+(The script for the above analysis can be found at 'src/data_distributions.py')
+
 ## Frequentist Hypothesis Testing
 
 The research hypothesis for this investigation is that top-performers in the 40-yard dash are selected in the 1st round of the NFL Draft at a higher frequency than top-performers in any of the other 5 drills.
@@ -181,6 +183,7 @@ The p-value calculated in this hypothesis test represents the probability of fin
 |Shuttle Drill | 0.0025|
 |3 Cone | 0.00072 |
 
+(The script for the above test can be found at 'src/hypothesis_z_test.py')
 
 ## Bayesian A/B Testing
 
@@ -227,7 +230,7 @@ When I used the frequentist approach, I was comfortable making my statements wit
 |3 Cone |0.032|.9515|
  
  
-
+(The script for the above test can be found at 'src/bayesian_test.py')
 
 ## Conclusion
 
