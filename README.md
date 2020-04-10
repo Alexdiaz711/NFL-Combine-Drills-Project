@@ -120,7 +120,7 @@ Below are normalized histograms of the scores for all six Combine drills, each w
 <img src="images/drill_data_dist_fits.png">
 </p>
 
-It seems like this is an effective method of approximating the distribution of the Combine drill scores. Further investigation on the proper techniques are forthcoming after this investigation. On to testing the research hypothesis.
+It seems like this is an effective method of approximating the distribution of the Combine drill scores. Research on the proper techniques are forthcoming after this investigation. On to testing the research hypothesis.
 
 ## Frequentist Hypothesis Testing
 
@@ -216,7 +216,7 @@ Now we can sample from those distributions many times (lets say 10,000) and calc
 
 Thus, in every case, I can say there is greater than a 98.8% chance that the 40-yard dash TPs are drafted in the first round at a higher rate. But the testing isn't over yet! The best part about Bayesian A/B testing is that we can quantify the advantage and still result in probability of the 40-yard being better. This time, I count up the number of times that the sample from the 40-yard posterior is greater than the sample from the bench press posterior by a predetermined difference, say 2.0 percentage points (is 40-yd sample > BP sample + 2.0).
 
-When I used the frequentist approach, I was confortable making my statements with 95% confidence, and I still am. So I can increment the predetermined difference by 0.1 and run the simulation over and over, incrementing the predetermined difference until just before the 95% threshold is breached. Below are the results of these simulations:
+When I used the frequentist approach, I was comfortable making my statements with 95% confidence, and I still am. So I can increment the predetermined difference by 0.1 and run the simulation over and over, each time incrementing the predetermined difference until just before the 95% threshold is breached. Below are the results of these simulations:
 
 | 40-yard vs | assumed diff | probability |
 |---|---|---|
@@ -231,6 +231,23 @@ When I used the frequentist approach, I was confortable making my statements wit
 
 ## Conclusion
 
-## Potential Influencing Outside Factors
+Using the frequentist approach, I was able to reject the statement that top performers in the 40-yard dash are not drafted in the 1st round at a higher rate than top performers in the other drills, and I was able to reject that statement with 95% confidence.
+
+Using bayesian A/B testing, I was able to draw the following conclusions:
+- There is a greater than 95% chance that top performers in the 40-yard dash are drafted in the 1st round at a rate that is 6.7 percentage points higher than top performers in the bench press. 
+- There is a greater than 95% chance that top performers in the 40-yard dash are drafted in the 1st round at a rate that is 3.1 percentage points higher than top performers in the vertical leap.
+- There is a greater than 95% chance that top performers in the 40-yard dash are drafted in the 1st round at a rate that is 1.3 percentage points higher than top performers in the broad jump.
+- There is a greater than 95% chance that top performers in the 40-yard dash are drafted in the 1st round at a rate that is 2.4 percentage points higher than top performers in the shuttle drill.
+- There is a greater than 95% chance that top performers in the 40-yard dash are drafted in the 1st round at a rate that is 3.2 percentage points higher than top performers in the 3-cone drill.
+
+## Potential Influencing Factors
+
+There are always factors that may influence the data. As data scientists, we try to set up our testing in a way that minimizes these factors, however in this case, I can think of a few:
+- Not all combine attendees participate in every drill. Thus, some first round picks may, for example, have only participated in the 40-yard dash.
+- Some first round picks participate in no drills.
 
 ## Whats Next?
+
+After this experience, there are some things I would like to investigate further:
+- Investigate the method of partitioning a sample, and fitting models to the partitions, and then recombining the partitions' fits models to approximate the distribution of the total sample.
+- Use regression methods to take the combine performance metrics, combined with college statistics, and try to build a predictive model for draft position.
