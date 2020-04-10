@@ -120,7 +120,7 @@ Below are normalized histograms of the scores for all six Combine drills, each w
 <img src="images/drill_data_dist_fits.png">
 </p>
 
-It seems like this is an effective method of approximating the distribution of the Combine drill scores. On to testing the research hypothesis.
+It seems like this is an effective method of approximating the distribution of the Combine drill scores. Further investigation on the proper techniques are forthcoming after this investigation. On to testing the research hypothesis.
 
 ## Frequentist Hypothesis Testing
 
@@ -139,16 +139,16 @@ A sneak-peak at the probability of success from each of the drills' samples, I s
 
 First I state my null and alternate hypothesis, taking a skeptical stance for my null: 
 <p>Null hypothesis: 40-yard top-performers (TPs) are not drafted in the 1st round at a higher frequency than bench press TPs.</p>
-<p align="center">H<sub>0</sub>: p<sub>40</sub> <= p<sub>BP</sub></p>
+<p align="center"><img src="images/eqs/CodeCogsEqn.svg"></p>
  
 <p>Alternate hypothesis: 40-yard TPs are drafted in the 1st round at a higher frequency than bench press TPs.</p>
-<p align="center">H<sub>A</sub>: p<sub>40</sub> > p<sub>BP</sub></p>
+<p align="center"><img src="images/eqs/CodeCogsEqn (1).svg"></p>
 
 Given the sample size, a Normal approximation for each of these binomial random variables is appropriate:
-***<p align="center">Binomial(n=820, p<sub>40</sub>) ~ Normal(820p<sub>40</sub>, (820p<sub>40</sub>(1-p<sub>40</sub>))<sup>1/2</sup>)</p>***
+<p align="center"><img src="images/eqs/CodeCogsEqn (2).svg"></p>
 
 As stated in the null hypothesis, I want to examine the frequency that 40-yard and bench press TPs are drafted in the 1st round:
-***<p align="center">Frequency that 40-yard TPs are drafted in the 1st round ~ Normal(p<sub>40</sub>, (p<sub>40</sub>(1-p<sub>40</sub>)/820)<sup>1/2</sup>)</p>***
+***<p align="center">Frequency that 40-yard TPs are drafted in the 1st round ~     <img src="images/eqs/CodeCogsEqn (3).svg"></p>***
 
 Now I have a probabilistic model for the difference in sample frequencies:
 ***<p align="center">Diff in sample freq between 40-yard and bench press ~ Normal(p<sub>40</sub> - p<sub>BP</sub>, (p<sub>40</sub>(1-p<sub>40</sub>)/820 + p<sub>BP</sub>(1-p<sub>BP</sub>)/672)<sup>1/2</sup>)</p>***
