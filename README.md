@@ -148,20 +148,20 @@ Given the sample size, a Normal approximation for each of these binomial random 
 <p align="center"><img src="images/eqs/CodeCogsEqn (2).svg"></p>
 
 As stated in the null hypothesis, I want to examine the frequency that 40-yard and bench press TPs are drafted in the 1st round:
-***<p align="center">Frequency that 40-yard TPs are drafted in the 1st round ~     <img src="images/eqs/CodeCogsEqn (3).svg"></p>***
+***<p align="center">Frequency that 40-yard TPs are drafted in the 1st round ~ <img src="images/eqs/CodeCogsEqn (3).svg"></p>***
 
 Now I have a probabilistic model for the difference in sample frequencies:
-***<p align="center">Diff in sample freq between 40-yard and bench press ~ Normal(p<sub>40</sub> - p<sub>BP</sub>, (p<sub>40</sub>(1-p<sub>40</sub>)/820 + p<sub>BP</sub>(1-p<sub>BP</sub>)/672)<sup>1/2</sup>)</p>***
+***<p align="center">Diff in sample freq between 40-yard and bench press ~ <img src="images/eqs/CodeCogsEqn (4).svg"></p>***
 
 Circling back to the null hypothesis, H<sub>0</sub>: p<sub>40</sub> <= p<sub>BP</sub>, I take the most conservative hypothesis:
-***<p align="center">H<sub>0</sub>: p<sub>40</sub> = p<sub>BP</sub> = p</p>***
+<img src="images/eqs/CodeCogsEqn (5).svg">
 
 where p is the shared sample frequency.
 This reduces the null hypothesis to:
-***<p align="center">Diff in sample freq between 40-yard and bench press ~ Normal(0, ((820+672)p(1-p)/(820x672))<sup>1/2</sup>)</p>***
+***<p align="center">Diff in sample freq between 40-yard and bench press ~ <img src="images/eqs/CodeCogsEqn (6).svg"></p>***
 
 For the shared sample frequency, I will use the samples to estimate the value:
-***<p align="center">p = (820p<sub>40</sub> + 672p<sub>BP</sub>)/(820+672)</p>***
+***<p align="center"><img src="images/eqs/CodeCogsEqn (7).svg"></p>***
 
 Now I declare an alpha (or null-rejection threshold) of alpha=0.05, so any p-value less than 0.05 allows me to reject the null with 95% confidence. This still leaves a 5% chance that I may incorrectly reject the null. I determine the p-value by using the actual difference in sample frequencies between the 40-yard TP sample and the bench press TP sample. The area under the  null hypothesis distribution that is to the right of the actual difference in sample frequencies, is the p-value.
 
