@@ -112,6 +112,8 @@ def combined_norm_fits(drill_name, axes, name):
         to be plotted on.
     name: str
         A string to be used as the plot title
+    print: bool
+        A boolean value to print the normal fits' loc/shape
     ----------
     Returns 
     ----------
@@ -127,6 +129,7 @@ def combined_norm_fits(drill_name, axes, name):
     for i, w in enumerate(w_qs):
         data = w[w[drill_name] > 0.1][drill_name]
         mu[q[i]], s[q[i]] = stats.norm.fit(data)
+        print(drill_name, q[i], mu[q[i]], s[q[i]])
     x = np.linspace(mean - 4* std, mean + 4*std, 1000)
     y = (stats.norm.pdf(x, mu[q[0]], s[q[0]]) + stats.norm.pdf(x, mu[q[1]], s[q[1]]) 
          + stats.norm.pdf(x, mu[q[2]], s[q[2]]) + stats.norm.pdf(x, mu[q[3]], s[q[3]]))/4

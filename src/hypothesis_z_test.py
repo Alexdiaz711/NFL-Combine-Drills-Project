@@ -40,13 +40,11 @@ def two_sample_z(drill_name, assumed_diff, alpha):
     power = 1 - dist_alt.cdf(critical_value)
     x = np.linspace(0-5*s_shared, 0+10*s_shared, 1000)
     plot = ax.plot(x, dist_null.pdf(x), color='g', label='$H_0$', zorder=2)
-    plot2 = ax.plot(x, dist_alt.pdf(x), color='m', label='$H_a$', zorder=3)
     fill = ax.fill_between(x, dist_null.pdf(x), 
                 where=(x >= sample_diff),color="blue", label='p-value\n region', zorder=4)
-    fill2 = ax.fill_between(x, dist_alt.pdf(x), alpha=0.5, 
-                where=(x >= critical_value),color="grey", label='power', zorder=1)
     line = ax.axvline(sample_diff, color='b', alpha = 0.5, ls='--', zorder=5)
-    critical = ax.axvline(critical_value, color='r', alpha = 0.5, ls='--', zorder=6)
+    critical = ax.axvline(critical_value, color='r', label='critical value', 
+                alpha = 0.5, ls='--', zorder=6)
     legend = ax.legend(loc='best')
     title = ax.set_title("Distribution of Difference in Sample Frequencies \n {} vs {} \n p-value:{:0.2}, Power of test ={:2.3}"
                 .format(short_name[drills[0]], short_name[drill_name], p_value, power))
