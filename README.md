@@ -128,12 +128,12 @@ The research hypothesis for this investigation is that top-performers in the 40-
 
 The six Combine drill's samples of top performers are modeled as samples of the following binomial random variables:
 
-<p align="center">40-yard dash top-performers drafted in the 1st round ~ Binomial(n=820, p<sub>40</sub>)</p>
-<p align="center">Bench press top-performers drafted in the 1st round ~ Binomial(n=672, p<sub>BP</sub>)</p>
-<p align="center">Vertical leap top-performers drafted in the 1st round ~ Binomial(n=732, p<sub>VL</sub>)</p>
-<p align="center">Broad jump top-performers drafted in the 1st round ~ Binomial(n=716, p<sub>BJ</sub>)</p>
-<p align="center">Shuttle drill top-performers drafted in the 1st round ~ Binomial(n=644, p<sub>Sh</sub>)</p>
-<p align="center">3 cone drill top-performers drafted in the 1st round ~ Binomial(n=598, p<sub>3C</sub>)</p>
+<p align="center"><img src="images/eqs/CodeCogsEqn (11).svg"></p>
+<p align="center"><img src="images/eqs/CodeCogsEqn (12).svg"></p>
+<p align="center"><img src="images/eqs/CodeCogsEqn (13).svg"></p>
+<p align="center"><img src="images/eqs/CodeCogsEqn (14).svg"></p>
+<p align="center"><img src="images/eqs/CodeCogsEqn (15).svg"></p>
+<p align="center"><img src="images/eqs/CodeCogsEqn (16).svg"></p>
 
 A sneak-peak at the probability of success from each of the drills' samples, I see that the frequency of being drafted in the first round was the highest for the 40-yard dash top-performers. This bodes well for my research hypothesis, and enables me to focus on a one-tailed, two-sample z-test. I will walk through the hypothesis testing setup for the 40-yard dash vs the bench press, but I will repeat this process for the 40-yard dash vs each of the other tests in turn. 
 
