@@ -120,7 +120,7 @@ Below are normalized histograms of the scores for all six Combine drills, each w
 <img src="images/drill_data_dist_fits.png">
 </p>
 
-It seems like this is an effective method of approximating the distribution of the Combine drill scores, but I leave that for another time. On to testing the research hypothesis.
+It seems like this is an effective method of approximating the distribution of the Combine drill scores. On to testing the research hypothesis.
 
 ## Frequentist Hypothesis Testing
 
@@ -135,7 +135,7 @@ The six Combine drill's samples of top performers are modeled as samples of the 
 <p align="center">Shuttle drill top-performers drafted in the 1st round ~ Binomial(n=644, p<sub>Sh</sub>)</p>
 <p align="center">3 cone drill top-performers drafted in the 1st round ~ Binomial(n=598, p<sub>3C</sub>)</p>
 
-A sneak-peak at the probability of success from each of the drills' samples, I see that the frequency of being drafted in the first round was the highest for the 40-yard dash top-performers. This bodes well for my research hypothesis, and enables me to focus on a one-tailed z-test. I will walk through the hypothesis testing setup for the 40-yard dash vs the bench press, but I will repeat this process for the 40-yard dash vs each of the other tests in turn. 
+A sneak-peak at the probability of success from each of the drills' samples, I see that the frequency of being drafted in the first round was the highest for the 40-yard dash top-performers. This bodes well for my research hypothesis, and enables me to focus on a one-tailed, two-sample z-test. I will walk through the hypothesis testing setup for the 40-yard dash vs the bench press, but I will repeat this process for the 40-yard dash vs each of the other tests in turn. 
 
 First I state my null and alternate hypothesis, taking a skeptical stance for my null: 
 <p>Null hypothesis: 40-yard top-performers (TPs) are not drafted in the 1st round at a higher frequency than bench press TPs.</p>
@@ -180,9 +180,10 @@ The p-value calculated in this hypothesis test represents the probability of fin
 |Shuttle Drill | 0.0025|
 |3 Cone | 0.00072 |
 
-The frequentist approach followed here gave me:
+The frequentist approach that I followed in this section gave me:
 ***<p align="center">P(Observing this data | Null Hypothesis)</p>***
-But next I turn to the Bayesian approach to determine:
+
+Next, I turn to the Bayesian approach to determine:
 ***<p align="center">P(Alternate Hypothesis | Observed Data)</p>***
 
 ## Bayesian AB Testing
