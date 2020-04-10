@@ -181,13 +181,53 @@ The p-value calculated in this hypothesis test represents the probability of fin
 |Shuttle Drill | 0.0025|
 |3 Cone | 0.00072 |
 
+
+## Bayesian A/B Testing
+
 The frequentist approach that I followed in this section gave me:
 ***<p align="center">P(Observing this data | Null Hypothesis)</p>***
 
 Next, I turn to the Bayesian approach to determine:
 ***<p align="center">P(Alternate Hypothesis | Observed Data)</p>***
 
-## Bayesian AB Testing
+Setting up a Bayesian A/B test is useful to tell us what is the probability that the sample frequency for the 40-yard TPs is really higher than the bench press TPs. First, no prior knowledge of the probabilities of success for either sample was assumed so, a uniform distribution was created. That is, there is an equal chance of success or failure. Instead of using an actual uniform distribution, we use the equivalent beta distribution:
+
+<p align="center"><img src="images/eqs/CodeCogsEqn (8).svg"></p>
+
+Now for both the 40-yard dash sample of TPs, the number of successes (1st round picks) and failures are added to the alpha and beta parameters from the prior, respectively, in order to determine the posterior probabilities:
+
+<p align="center"><img src="images/eqs/CodeCogsEqn (9).svg"></p>
+
+<p align="center"><img src="images/eqs/CodeCogsEqn (10).svg"></p>
+
+ Below is a figure of both posterior probability distributions, along with the uniform prior probability distribution for each A/B that was set up:
+ 
+<p align="center"><img src="images/bayes_AB_all.png"></p>
+
+Now we can sample from those distributions many times (lets say 10,000) and calculate the fraction of those samples where the 40-yard TPs rate of being drafted in the 1st round was larger than that of the bench press TPs. The results are illustrated in a table below:
+
+| 40-yard vs | # of times 40 > other | probability |
+|---|---|---|
+|Bench Press | 10000/10000|1.0|
+|Vertical Leap| 9997/10000|.9997|
+|Broad Jump | 9883/10000|.9883|
+|Shuttle Drill | 9973/10000|.9973|
+|3 Cone |9991/10000|.9991|
+
+Thus, in every case, I can say there is greater than a 98.8% chance that the 40-yard dash TPs are drafted in the first round at a higher rate. But the testing isn't over yet! The best part about Bayesian A/B testing is that we can quantify the advantage and still result in probability of the 40-yard being better. This time, I count up the number of times that the sample from the 40-yard posterior is greater than the sample from the bench press posterior by a predetermined difference, say 2.0 percentage points (is 40-yd sample > BP sample + 2.0).
+
+When I used the frequentist approach, I was confortable making my statements with 95% confidence, and I still am. So I can increment the predetermined difference by 0.1 and run the simulation over and over, incrementing the predetermined difference until just before the 95% threshold is breached. Below are the results of these simulations:
+
+| 40-yard vs | assumed diff | probability |
+|---|---|---|
+|Bench Press | 0.067|.9561|
+|Vertical Leap| 0.031|.9553|
+|Broad Jump | 0.013|.9503|
+|Shuttle Drill | 0.024|.9516|
+|3 Cone |0.032|.9515|
+ 
+ 
+
 
 ## Conclusion
 
