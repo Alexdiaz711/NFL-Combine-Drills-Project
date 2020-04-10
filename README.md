@@ -128,17 +128,62 @@ The research hypothesis for this investigation is that top-performers in the 40-
 
 The six Combine drill's samples of top performers are modeled as samples of the following binomial random variables:
 
-<p align="center">40-yard dash top-performers drafted in the 1st round ~ Binomial(n=820, p=0.206)</p>
-<p align="center">Bench press top-performers drafted in the 1st round ~ Binomial(n=672, p=0.107)</p>
-<p align="center">Vertical leap top-performers drafted in the 1st round ~ Binomial(n=732, p=0.142)</p>
-<p align="center">Broad jump top-performers drafted in the 1st round ~ Binomial(n=716, p=0.161)</p>
-<p align="center">Shuttle drill top-performers drafted in the 1st round ~ Binomial(n=644, p=0.149)</p>
-<p align="center">3 cone drill top-performers drafted in the 1st round ~ Binomial(n=598, p=0.140)</p>
+<p align="center">40-yard dash top-performers drafted in the 1st round ~ Binomial(n=820, p<sub>40</sub>)</p>
+<p align="center">Bench press top-performers drafted in the 1st round ~ Binomial(n=672, p<sub>BP</sub>)</p>
+<p align="center">Vertical leap top-performers drafted in the 1st round ~ Binomial(n=732, p<sub>VL</sub>)</p>
+<p align="center">Broad jump top-performers drafted in the 1st round ~ Binomial(n=716, p<sub>BJ</sub>)</p>
+<p align="center">Shuttle drill top-performers drafted in the 1st round ~ Binomial(n=644, p<sub>Sh</sub>)</p>
+<p align="center">3 cone drill top-performers drafted in the 1st round ~ Binomial(n=598, p<sub>3C</sub>)</p>
 
-Examining the probability of success from each of the binomial random variables, I see that the frequency of being drafted in the first round was the highest for the 40-yard dash top-performers. This bodes well for my research hypothesis, and enables me to focus on a one-tailed z-test. I will walk throught the hypothesis testing setup for the 40-yard dash vs the bench press, but I will repeat this process for the 40-yard dash vs each of the other tests in turn. 
+A sneak-peak at the probability of success from each of the drills' samples, I see that the frequency of being drafted in the first round was the highest for the 40-yard dash top-performers. This bodes well for my research hypothesis, and enables me to focus on a one-tailed z-test. I will walk through the hypothesis testing setup for the 40-yard dash vs the bench press, but I will repeat this process for the 40-yard dash vs each of the other tests in turn. 
 
-First I state my null and alternate hypothesis: 
-<p align="center">H<sub>0</sub>: Top-performers in the 40-yard dash are not drafted in the 1st round at a higher frequency than top-performers in the bench press</p>
+First I state my null and alternate hypothesis, taking a skeptical stance for my null: 
+<p>Null hypothesis: 40-yard top-performers (TPs) are not drafted in the 1st round at a higher frequency than bench press TPs.</p>
+<p align="center">H<sub>0</sub>: p<sub>40</sub> <= p<sub>BP</sub></p>
+ 
+<p>Alternate hypothesis: 40-yard TPs are drafted in the 1st round at a higher frequency than bench press TPs.</p>
+<p align="center">H<sub>A</sub>: p<sub>40</sub> > p<sub>BP</sub></p>
+
+Given the sample size, a Normal approximation for each of these binomial random variables is appropriate:
+***<p align="center">Binomial(n=820, p<sub>40</sub>) ~ Normal(820p<sub>40</sub>, (820p<sub>40</sub>(1-p<sub>40</sub>))<sup>1/2</sup>)</p>***
+
+As stated in the null hypothesis, I want to examine the frequency that 40-yard and bench press TPs are drafted in the 1st round:
+***<p align="center">Frequency that 40-yard TPs are drafted in the 1st round ~ Normal(p<sub>40</sub>, (p<sub>40</sub>(1-p<sub>40</sub>)/820)<sup>1/2</sup>)</p>***
+
+Now I have a probabilistic model for the difference in sample frequencies:
+***<p align="center">Diff in sample freq between 40-yard and bench press ~ Normal(p<sub>40</sub> - p<sub>BP</sub>, (p<sub>40</sub>(1-p<sub>40</sub>)/820 + p<sub>BP</sub>(1-p<sub>BP</sub>)/672)<sup>1/2</sup>)</p>***
+
+Circling back to the null hypothesis, H<sub>0</sub>: p<sub>40</sub> <= p<sub>BP</sub>, I take the most conservative hypothesis:
+***<p align="center">H<sub>0</sub>: p<sub>40</sub> = p<sub>BP</sub> = p</p>***
+
+where p is the shared sample frequency.
+This reduces the null hypothesis to:
+***<p align="center">Diff in sample freq between 40-yard and bench press ~ Normal(0, ((820+672)p(1-p)/(820x672))<sup>1/2</sup>)</p>***
+
+For the shared sample frequency, I will use the samples to estimate the value:
+***<p align="center">p = (820p<sub>40</sub> + 672p<sub>BP</sub>)/(820+672)</p>***
+
+Now I declare an alpha (or null-rejection threshold) of alpha=0.05, so any p-value less than 0.05 allows me to reject the null with 95% confidence. This still leaves a 5% chance that I may incorrectly reject the null. I determine the p-value by using the actual difference in sample frequencies between the 40-yard TP sample and the bench press TP sample. The area under the  null hypothesis distribution that is to the right of the actual difference in sample frequencies, is the p-value.
+
+Below is a visualization of each of the z-tests between the 40-yard dash TPs and the other drills' TPs:
+
+![Z-tests](images/z_test_all.png)
+
+The p-value calculated in this hypothesis test represents the probability of finding a difference in sample frequencies at least as extreme as the observed data assuming the null hypothesis to be true. The p-values for all tests are well below 0.05, thus I can reject the null hypothesis with 95% confidence in every case:
+
+
+| 40-yard vs | p-value |
+|---|---|
+|Bench Press | 1.2e-7|
+|Vertical Leap| 0.00047|
+|Broad Jump | 0.011|
+|Shuttle Drill | 0.0025|
+|3 Cone | 0.00072 |
+
+The frequentist approach followed here gave me:
+***<p align="center">P(Observing this data | Null Hypothesis)</p>***
+But next I turn to the Bayesian approach to determine:
+***<p align="center">P(Alternate Hypothesis | Observed Data)</p>***
 
 ## Bayesian AB Testing
 
