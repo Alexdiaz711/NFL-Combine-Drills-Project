@@ -154,7 +154,8 @@ Now I have a probabilistic model for the difference in sample frequencies:
 <p align="center">Diff in sample freq between 40-yard and bench press ~ <img src="images/eqs/CodeCogsEqn (4).svg"></p>
 
 Circling back to the null hypothesis, H<sub>0</sub>: p<sub>40</sub> <= p<sub>BP</sub>, I take the most conservative hypothesis:
-<img src="images/eqs/CodeCogsEqn (5).svg">
+
+<p align="center"><img src="images/eqs/CodeCogsEqn (5).svg"></p>
 
 where p is the shared sample frequency.
 This reduces the null hypothesis to:
