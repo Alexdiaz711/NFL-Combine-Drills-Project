@@ -150,10 +150,10 @@ Given the sample size, a Normal approximation for each of these binomial random 
 <p align="center"><img src="images/eqs/CodeCogsEqn (2).svg"></p>
 
 As stated in the null hypothesis, I want to examine the frequency that 40-yard and bench press TPs are drafted in the 1st round:
-<p align="center">Frequency that 40-yard TPs are drafted in the 1st round ~ <img src="images/eqs/CodeCogsEqn (3).svg"></p>
+<p align="center"> <img src="images/eqs/CodeCogsEqn (3).svg"></p>
 
 Now I have a probabilistic model for the difference in sample frequencies:
-<p align="center">Diff in sample freq between 40-yard and bench press ~ <img src="images/eqs/CodeCogsEqn (4).svg"></p>
+<p align="center"><img src="images/eqs/CodeCogsEqn (4).svg"></p>
 
 Circling back to the null hypothesis, H<sub>0</sub>: p<sub>40</sub> <= p<sub>BP</sub>, I take the most conservative hypothesis:
 
@@ -161,7 +161,7 @@ Circling back to the null hypothesis, H<sub>0</sub>: p<sub>40</sub> <= p<sub>BP<
 
 where p is the shared sample frequency.
 This reduces the null hypothesis to:
-<p align="center">Diff in sample freq between 40-yard and bench press ~ <img src="images/eqs/CodeCogsEqn (6).svg"></p>
+<p align="center"><img src="images/eqs/CodeCogsEqn (6).svg"></p>
 
 For the shared sample frequency, I will use the samples to estimate the value:
 <p align="center"><img src="images/eqs/CodeCogsEqn (7).svg"></p>
