@@ -252,5 +252,5 @@ There are always factors that may influence the data. As data scientists, we try
 ## Whats Next?
 
 After this experience, there are some things I would like to investigate further:
-- Investigate the method of partitioning a sample, and fitting models to the partitions, and then recombining the partitions' fits models to approximate the distribution of the total sample.
+- Investigate the method of partitioning a sample, and fitting models to the partitions, and then recombining the partitions' fit models to approximate the distribution of the total sample.
 - Use regression methods to take the combine performance metrics, combined with college statistics, and try to build a predictive model for draft position.
