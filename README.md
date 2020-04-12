@@ -217,7 +217,7 @@ Now we can sample from those distributions many times (lets say 10,000) and calc
 |Shuttle Drill | 9973/10000|.9973|
 |3 Cone |9991/10000|.9991|
 
-Thus, in every case, I can say there is greater than a 98.8% chance that the 40-yard dash TPs are drafted in the first round at a higher rate. But the testing isn't over yet! The best part about Bayesian A/B testing is that we can quantify the advantage and still result in probability of the 40-yard being better. This time, I count up the number of times that the sample from the 40-yard posterior is greater than the sample from the bench press posterior by a predetermined difference, say 2.0 percentage points (is 40-yd sample > BP sample + 2.0).
+Thus, in every case, I can say there is greater than a 98.8% chance that the 40-yard dash TPs are drafted in the first round at a higher rate. But the testing isn't over yet! The best part about Bayesian A/B testing is that we can quantify the advantage and still result in probability of the 40-yard being better. This time, I count up the number of times that the sample from the 40-yard posterior is greater than the sample from the bench press posterior by a predetermined difference, say 2.0 percentage points (is 40-yd sample > BP sample + 0.02).
 
 When I used the frequentist approach, I was comfortable making my statements with 95% confidence, and I still am. So I can increment the predetermined difference by 0.001 and run the simulation over and over, each time incrementing the predetermined difference until just before the 95% threshold is breached. Below are the results of these simulations:
 
